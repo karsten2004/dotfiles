@@ -1,4 +1,4 @@
-Karstadt Kaufhof GmbH
+"Karstadt Kaufhof GmbH
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
 "               ██╗   ██╗██╗███╗   ███╗██████╗  ██████╗
@@ -15,7 +15,14 @@ call plug#end()
 
 set nocompatible
 set number
+set relativenumber
 set lazyredraw
+
+set fileformat=unix
+set encoding=UTF-8
+
+set list
+set listchars=eol:¬,tab:>-,trail:˽,extends:>,precedes:<
 
 "file syntax and stuff
 filetype on

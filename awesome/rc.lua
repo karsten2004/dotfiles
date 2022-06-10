@@ -32,6 +32,10 @@ if awesome.startup_errors then
 end
 
 -- Handle runtime errors after startup
+
+-- set background
+awful.spawn.with_shell("~/.fehbg")
+
 do
     local in_error = false
     awesome.connect_signal("debug::error", function (err)
@@ -82,6 +86,13 @@ awful.layout.layouts = {
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
 }
+
+
+lock_screen = function ()
+--    awful.util.spawn("i3lock --no-verify --pass-media-keys --pass-volume-keys --bar-indicator -k -f --image='/home/karsten/Pictures/Backgrounds/Astronaut dude.png'")
+    awful.util.spawn("i3lock --pass-media-keys --pass-volume-keys --bar-indicator -k -f --image='/home/karsten/Pictures/Backgrounds/Astronaut dude.png'")
+end
+
 -- }}}
 
 -- {{{ Menu
@@ -90,11 +101,16 @@ myawesomemenu = {
    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "manual", terminal .. " -e man awesome" },
    { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end },
+   { "restart awesome", awesome.restart },
+   { "quit awesome", function() awesome.quit() end },
+}
+--Create a system control menu
+mySystemMenu = {
+   { "lock screen", function() lock_screen() end },
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+                                    { "system", mySystemMenu},
                                     { "open terminal", terminal }
                                   }
                         })
@@ -341,11 +357,17 @@ clientkeys = gears.table.join(
         end,
         {description = "toggle fullscreen", group = "client"}),
 
+    --lock screen
+    awful.key({modkey,            }, "`", function () lock_screen() end ),
+
     --volume control
-    awful.key({}, "XF86AudioRaiseVolume", function() os.execute("pactl set-sink-volume 0 +5%") end),
-    awful.key({}, "XF86AudioLowerVolume", function() os.execute("pactl set-sink-volume 0 -5%") end),
-    awful.key({}, "XF86AudioMute", function() os.execute("pactl set-sink-mute 0 toggle") end),
-    -- spotify playback control
+    awful.key({}, "XF86AudioRaiseVolume", function()  awful.util.spawn("pactl set-sink-volume 0 +5%") end),
+    awful.key({}, "XF86AudioLowerVolume", function() awful.util.spawn("pactl set-sink-volume 0 -5%") end),
+    awful.key({}, "XF86AudioMute", function() awful.util.spawn("pactl set-sink-mute 0 toggle") end),
+    -- playback control
+       awful.key({}, "XF86AudioPlay", function() awful.util.spawn("playerctl play-pause", false) end),
+       awful.key({}, "XF86AudioNext", function() awful.util.spawn("playerctl next", false) end),
+       awful.key({}, "XF86AudioPrev", function() awful.util.spawn("playerctl previous", false) end),
 	
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
@@ -573,3 +595,7 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+-- Autostart Applications
+awful.spawn.with_shell("picom") --compositor
+-- awful.spawn.with_shell("nitrogen --restore")

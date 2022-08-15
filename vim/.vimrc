@@ -82,3 +82,7 @@ set laststatus=2
 
 "keybinds
 nnoremap <leader>r :!clear && %:p<Enter>
+vmap <C-c> "+y
+
+"clipboards synchronized
+set clipboard^=unnamed,unnamedplus

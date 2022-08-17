@@ -1,4 +1,3 @@
-
 local table = {
 -- {{{ Variable definitions
 -- This is used later as the default terminal and editor to run.

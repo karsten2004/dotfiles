@@ -60,6 +60,7 @@ beautiful.init(gears.filesystem.get_configuration_dir () .. "themes/default/them
 terminal = "alacritty"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
+home_dir = os.getenv("HOME") .. "/"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -90,8 +91,8 @@ awful.layout.layouts = {
 
 
 lock_screen = function ()
---    awful.util.spawn("i3lock --no-verify --pass-media-keys --pass-volume-keys --bar-indicator -k -f --image='/home/karsten/Pictures/Backgrounds/Astronaut dude.png'")
-    awful.util.spawn("i3lock --ignore-empty-password --pass-media-keys --pass-volume-keys --force-clock --time-size=36 --date-size=18 --time-pos=\"w/2:iy+4\" --date-pos=\"tx:ty+24\" --indicator --radius 32 --ind-pos=\"(w/2)-130:h/2\" --wrong-text=\"\" --verif-text=\"\" --noinput-text=\"\" --lock-text=\"\" --lockfailed-text=\"screen not locked\" --time-color=FDFCFFFF --date-color=FDFCFFFF --ring-width 7 --inside-color=16143B7F --ring-color=16143BFF --keyhl-color=689F4CFF --bshl-color=5D1231FF --separator-color=16143B7F --insidewrong-color=5D12317F --ringwrong-color=5D1231FF --ringver-color=77DEF1FF --insidever-color=77DEF17F --line-uses-inside --no-modkey-text --image=\'/home/karsten/Pictures/Backgrounds/Astronaut dude.png\'")
+    awful.util.spawn(home_dir .. "dotfiles/i3lock-color/i3lock-color.sh")
+--    awful.util.spawn("i3lock --ignore-empty-password --pass-media-keys --pass-volume-keys --force-clock --time-size=36 --date-size=18 --time-pos=\"w/2:iy+4\" --date-pos=\"tx:ty+24\" --indicator --radius 32 --ind-pos=\"(w/2)-130:h/2\" --wrong-text=\"\" --verif-text=\"\" --noinput-text=\"\" --lock-text=\"\" --lockfailed-text=\"screen locking failed\" --time-color=FDFCFFFF --date-color=FDFCFFFF --ring-width 7 --inside-color=16143B7F --ring-color=16143BFF --keyhl-color=689F4CFF --bshl-color=5D1231FF --separator-color=16143B7F --insidewrong-color=5D12317F --ringwrong-color=5D1231FF --ringver-color=77DEF1FF --insidever-color=77DEF17F --line-uses-inside --no-modkey-text --image=\'/home/karsten/Pictures/Backgrounds/Astronaut dude.png\'")
 end
 
 -- }}}
@@ -349,14 +350,20 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"}),
 
+--Media Controls
     --volume control
     awful.key({}, "XF86AudioRaiseVolume", function()  awful.util.spawn("pactl set-sink-volume 0 +5%") end),
     awful.key({}, "XF86AudioLowerVolume", function() awful.util.spawn("pactl set-sink-volume 0 -5%") end),
     awful.key({}, "XF86AudioMute", function() awful.util.spawn("pactl set-sink-mute 0 toggle") end),
+
     -- playback control
-       awful.key({}, "XF86AudioPlay", function() awful.util.spawn("playerctl play-pause", false) end),
-       awful.key({}, "XF86AudioNext", function() awful.util.spawn("playerctl next", false) end),
-       awful.key({}, "XF86AudioPrev", function() awful.util.spawn("playerctl previous", false) end)
+    awful.key({}, "XF86AudioPlay", function() awful.util.spawn("playerctl next", false) end),
+    awful.key({}, "XF86AudioNext", function() awful.util.spawn("playerctl play-pause", false) end),
+    awful.key({}, "XF86AudioPrev", function() awful.util.spawn("playerctl previous", false) end),
+       --
+    --lock screen
+    awful.key({modkey,            }, "`", function () lock_screen() end )
+
 )
 
 clientkeys = gears.table.join(
@@ -366,9 +373,6 @@ clientkeys = gears.table.join(
             c:raise()
         end,
         {description = "toggle fullscreen", group = "client"}),
-
-    --lock screen
-    awful.key({modkey,            }, "`", function () lock_screen() end ),
 
 	
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,

@@ -117,7 +117,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                   }
                         })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+mylauncher = awful.widget.launcher({ image = gears.filesystem.get_configuration_dir () .. "LOGO_WHITE.svg",
                                      menu = mymainmenu })
 
 -- Menubar configuration

@@ -347,7 +347,16 @@ globalkeys = gears.table.join(
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+
+    --volume control
+    awful.key({}, "XF86AudioRaiseVolume", function()  awful.util.spawn("pactl set-sink-volume 0 +5%") end),
+    awful.key({}, "XF86AudioLowerVolume", function() awful.util.spawn("pactl set-sink-volume 0 -5%") end),
+    awful.key({}, "XF86AudioMute", function() awful.util.spawn("pactl set-sink-mute 0 toggle") end),
+    -- playback control
+       awful.key({}, "XF86AudioPlay", function() awful.util.spawn("playerctl play-pause", false) end),
+       awful.key({}, "XF86AudioNext", function() awful.util.spawn("playerctl next", false) end),
+       awful.key({}, "XF86AudioPrev", function() awful.util.spawn("playerctl previous", false) end)
 )
 
 clientkeys = gears.table.join(
@@ -361,14 +370,6 @@ clientkeys = gears.table.join(
     --lock screen
     awful.key({modkey,            }, "`", function () lock_screen() end ),
 
-    --volume control
-    awful.key({}, "XF86AudioRaiseVolume", function()  awful.util.spawn("pactl set-sink-volume 0 +5%") end),
-    awful.key({}, "XF86AudioLowerVolume", function() awful.util.spawn("pactl set-sink-volume 0 -5%") end),
-    awful.key({}, "XF86AudioMute", function() awful.util.spawn("pactl set-sink-mute 0 toggle") end),
-    -- playback control
-       awful.key({}, "XF86AudioPlay", function() awful.util.spawn("playerctl play-pause", false) end),
-       awful.key({}, "XF86AudioNext", function() awful.util.spawn("playerctl next", false) end),
-       awful.key({}, "XF86AudioPrev", function() awful.util.spawn("playerctl previous", false) end),
 	
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),

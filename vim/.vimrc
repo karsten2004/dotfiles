@@ -14,6 +14,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'sheerun/vim-polyglot'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
+    Plug 'psliwka/vim-smoothie'
 
 call plug#end()
 

@@ -1,4 +1,3 @@
-#!/bin/bash
 i3lock --ignore-empty-password \
 --pass-media-keys \
 --pass-volume-keys \

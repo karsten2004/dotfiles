@@ -55,7 +55,7 @@ set history=1000
 
 "search options
 set incsearch
-set ignorecase
+set smartcase
 set showmatch
 set hlsearch
 

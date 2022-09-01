@@ -30,7 +30,6 @@ if awesome.startup_errors then
                      title = "Oops, there were errors during startup!",
                      text = awesome.startup_errors })
 end
-
 -- Handle runtime errors after startup
 
 -- set background
@@ -55,6 +54,9 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_configuration_dir () .. "themes/default/theme.lua")
 --beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+
+--Compositor used:
+compositor = "picom"
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
@@ -365,6 +367,8 @@ globalkeys = gears.table.join(
     --lock screen
     awful.key({modkey,            }, "`", function () lock_screen() end )
 
+    --toggle compositor
+    --TODO: compositor toggling
 )
 
 clientkeys = gears.table.join(
@@ -604,5 +608,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- Autostart Applications
-awful.spawn.with_shell("picom") --compositor
+awful.spawn.with_shell(compositor) --compositor
 -- awful.spawn.with_shell("nitrogen --restore")

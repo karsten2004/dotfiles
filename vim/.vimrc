@@ -8,20 +8,33 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+set nocompatible              " be iMproved, required
 
-call plug#begin('~/.vim/plugged')
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-    Plug 'sheerun/vim-polyglot'
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-repeat'
-    Plug 'psliwka/vim-smoothie'
+" let Vundle manage Vundle, required
+	Plugin 'VundleVim/Vundle.vim'
 
-call plug#end()
+    Plugin 'sheerun/vim-polyglot'
+    Plugin 'tpope/vim-surround'
+    Plugin 'tpope/vim-repeat'
+    Plugin 'psliwka/vim-smoothie'
+	Plugin 'llathasa-veleth/vim-brainfuck'
+    Plugin 'ycm-core/YouCompleteMe'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removalcall plug#begin('~/.vim/plugged')
 
 set nocompatible
 set number
@@ -94,3 +107,15 @@ vmap <C-c> "+y
 set clipboard^=unnamed,unnamedplus
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
+
+"auto completion
+filetype plugin on
+au FileType php setl ofu=phpcomplete#CompletePHP
+au FileType ruby,eruby setl ofu=rubycomplete#Complete
+au FileType html,xhtml setl ofu=htmlcomplete#CompleteTags
+au FileType c setl ofu=ccomplete#CompleteCpp
+au FileType css setl ofu=csscomplete#CompleteCSS
+
+"autocompletion settings
+let g:enable_diagnostic_highlighting = 0
+let g:ycm_show_diagnostics_ui = 0

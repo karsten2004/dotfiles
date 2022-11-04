@@ -108,6 +108,8 @@ set clipboard^=unnamed,unnamedplus
 
 "nnoremap <C-d> <C-d>zz
 "nnoremap <C-u> <C-u>zz
+"Y -> y$
+nnoremap Y y$
 
 "auto completion
 filetype plugin on

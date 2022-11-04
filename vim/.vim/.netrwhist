@@ -1,6 +1,17 @@
 let g:netrw_dirhistmax  =10
+<<<<<<< HEAD
 let g:netrw_dirhistcnt =4
 let g:netrw_dirhist_4='/Users/karsten/.config'
+=======
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/home/karsten/Documents/School/Computer Organization/CO-LABS22/assignment3'
+let g:netrw_dirhist_0='/home/karsten/Documents/School/Computer Organization/CO-LABS22'
+let g:netrw_dirhist_9='/home/karsten/Documents/School/Computer Organization/CO-LABS22/assignment3'
+let g:netrw_dirhist_8='/home/karsten/Documents/School/Computer Organization/CO-LABS22'
+let g:netrw_dirhist_7='/etc/sysctl.d'
+let g:netrw_dirhist_6='/var/lib/bluetooth'
+let g:netrw_dirhist_5='/home/karsten/dotfiles/awesome/.config/awesome/themes/default'
+let g:netrw_dirhist_4='/etc/fonts/conf.d'
+>>>>>>> 8aacc1e (tmux)
 let g:netrw_dirhist_3='/etc/ssh'
 let g:netrw_dirhist_2='/home/karsten/dotfiles/awesome/theme/default'
-let g:netrw_dirhist_1='/home/karsten/dotfiles/vim/.vim'

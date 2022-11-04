@@ -105,8 +105,9 @@ vmap <C-c> "+y
 
 "clipboards synchronized
 set clipboard^=unnamed,unnamedplus
-nnoremap <C-d> <C-d>zz
-nnoremap <C-u> <C-u>zz
+
+"nnoremap <C-d> <C-d>zz
+"nnoremap <C-u> <C-u>zz
 
 "auto completion
 filetype plugin on
